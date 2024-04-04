@@ -252,6 +252,10 @@ DELAY 1.5
 tts_resume
 DELAY 1.5
 
+tts_say testing unknown command
+fakeCommand doesNotWork
+DELAY 1
+
 tts_say and exiting
 DELAY 1
 tts_exit

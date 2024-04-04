@@ -2,15 +2,9 @@ import argparse
 import os
 import subprocess
 import sys
-import threading
 import time
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-
-
-def read_output(process):
-    for line in process.stdout:
-        print(f"< {line.strip()}")
 
 
 def run_program(program, script):
@@ -50,13 +44,10 @@ def run_program(program, script):
             process = subprocess.Popen(
                 program,
                 stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
                 env=env,
             )
-            thread = threading.Thread(target=read_output, args=(process,))
-            thread.start()
         elif line.startswith("DELAY "):
             delay = float(line.split(" ", 1)[1])
             print(f"D: {delay}")
@@ -64,7 +55,7 @@ def run_program(program, script):
         else:
             if process and process.poll() is None:
                 print(f"> {line}")
-                process.stdin.write(line + "\n")
+                process.stdin.write((line + "\n").encode())
                 process.stdin.flush()
 
     if process:
