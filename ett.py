@@ -1,11 +1,16 @@
 import argparse
 import os
-import select
 import subprocess
 import sys
+import threading
 import time
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
+
+
+def read_output(process):
+    for line in process.stdout:
+        print(f"< {line.strip()}")
 
 
 def run_program(program, script):
@@ -21,13 +26,16 @@ def run_program(program, script):
             print("Skip Mode OFF")
             skip = False
             continue
+
         if line.startswith("#") or line == "" or skip == True:
             # print(f"S: {line}")
             continue
+
         if line.startswith("START_SKIP"):
             print("Skip Mode On")
             skip = True
             continue
+
         if line.startswith("ENV "):
             parts = line.split(" ", 2)
             if len(parts) == 3:
@@ -38,8 +46,6 @@ def run_program(program, script):
         elif line == "RESTART":
             if process:
                 process.stdin.close()
-                process.stdout.close()
-                process.stderr.close()
                 process.wait()
             process = subprocess.Popen(
                 program,
@@ -49,6 +55,8 @@ def run_program(program, script):
                 text=True,
                 env=env,
             )
+            thread = threading.Thread(target=read_output, args=(process,))
+            thread.start()
         elif line.startswith("DELAY "):
             delay = float(line.split(" ", 1)[1])
             print(f"D: {delay}")
@@ -59,24 +67,9 @@ def run_program(program, script):
                 process.stdin.write(line + "\n")
                 process.stdin.flush()
 
-                timeout = 0.1  # Adjust the timeout as needed
-                while True:
-                    ready, _, _ = select.select([process.stdout], [], [], timeout)
-                    if ready:
-                        output = process.stdout.readline()
-                        if output == "":
-                            break
-                        print(f"< {output.strip()}")
-                    else:
-                        break
-
-                    if process.poll() is not None:
-                        break
-
     if process:
         process.stdin.close()
-        process.stdout.close()
-        process.stderr.close()
+        process.wait()
 
 
 def main():
@@ -91,9 +84,7 @@ def main():
         default=sys.stdin,
         help="The script file to read from (default: stdin)",
     )
-
     args = parser.parse_args()
-
     run_program(args.program, args.script)
 
 
