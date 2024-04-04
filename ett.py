@@ -39,7 +39,8 @@ def run_program(program, script):
             env.clear()
         elif line == "RESTART":
             if process:
-                process.stdin.close()
+                if process.stdin:
+                    process.stdin.close()
                 process.wait()
             process = subprocess.Popen(
                 program,
@@ -47,6 +48,7 @@ def run_program(program, script):
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
                 env=env,
+                shell=True,
             )
         elif line.startswith("DELAY "):
             delay = float(line.split(" ", 1)[1])
@@ -55,11 +57,15 @@ def run_program(program, script):
         else:
             if process and process.poll() is None:
                 print(f"> {line}")
-                process.stdin.write((line + "\n").encode())
-                process.stdin.flush()
+                try:
+                    process.stdin.write((line + "\n").encode())
+                    process.stdin.flush()
+                except OSError as e:
+                    print(f"Error writing to stdin: {e}")
 
     if process:
-        process.stdin.close()
+        if process.stdin:
+            process.stdin.close()
         process.wait()
 
 
