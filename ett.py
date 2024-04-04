@@ -62,7 +62,7 @@ def run_program(program, script):
             print(f"D: {delay}")
             time.sleep(delay)
         else:
-            if process:
+            if process and process.poll() is None:
                 print(f"> {line}")
                 process.stdin.write(line + "\n")
                 process.stdin.flush()
