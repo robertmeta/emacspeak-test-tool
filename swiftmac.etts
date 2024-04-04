@@ -1,23 +1,12 @@
-# case "c": await processAndQueueCodes(l)
-# case "s": await queueLine(cmd, params)
-# case "tts_exit": await instantTtsExit()
-# case "tts_pause": await instantTtsPause()
-# case "tts_reset": await instantTtsReset()
-# case "tts_resume": await instantTtsResume()
-# case "tts_set_punctuations": await queueLine(cmd, params)
-# case "tts_sync_state": await processAndQueueSync(l)
-# case "version": await instantVersion()
-
-
 RESTART
 s
 d
+tts_say This test takes about 2 minutes
+DELAY 3
+
+tts_say Testing version (adn tts_say implicitly)
 version
 DELAY 3
-START_SKIP
-
-# For startup sound
-DELAY 2.2
 
 tts_say If you hear this, basic server is working
 DELAY 3
@@ -180,6 +169,8 @@ DELAY .3
 tts_say Testing audio icon queued
 DELAY 2
 a $ETTS_SD/ask-question.ogg
+a $ETTS_SD/ask-question.ogg
+a $ETTS_SD/ask-question.ogg
 d
 DELAY 1
 
@@ -208,16 +199,63 @@ q Every Word In This Starts With A Capital
 d
 DELAY 2
 
-END_SKIP
 tts_say Testing Split Caps
 DELAY 3
 q ThisIsCamelCaseWithoutSplitCaps
 tts_split_caps 1
 q ThisIsOneVeryLongCamelCaseWord
 d
-q ThisIsOneVeryLongCamelCaseWord
+DELAY 6
+
+tts_say testing stoping so this will end in the middle of the sentense
+DELAY 2.5
+s
 d
-DELAY 8
+
+tts_say testing voice embedding
+DELAY 2
+c [{voice Samantha}]
+q Samantha
+c [{voice Alex}]
+q Alex
+c [{voice Samantha}]
+q Samantha
+c [{voice Alex}]
+q Alex
+d
+DELAY 4
+
+tts_set_punctuations all
+q all punctuations $;< 
+tts_set_punctuations some
+q some punctuations $;< 
+tts_set_punctuations none
+q none punctuations $;< there
+d
+DELAY 6
+
+tts_say Test Reset
+DELAY 2
+tts_set_speech_rate 0.9
+q Super Fast fast Fast so Fast
+d
+DELAY 1
+tts_reset
+q back to normal
+d
+DELAY 3
+
+tts_say This is long because I am going to pause and then resume it
+DELAY 1.5
+tts_pause
+DELAY 1.5
+tts_resume
+DELAY 1.5
+
+tts_say and exiting
+DELAY 1
+tts_exit
+
 
 # Local Variables:
 # comment-start: "# "
