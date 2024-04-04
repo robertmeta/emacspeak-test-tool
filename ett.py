@@ -15,7 +15,7 @@ def run_program(program, script):
 
     for line in script:
         line = line.strip()
-        line = line.replace("$SD", script_dir)
+        line = line.replace("$ETTS_SD", script_dir)
 
         if line.startswith("END_SKIP"):
             print("Skip Mode OFF")

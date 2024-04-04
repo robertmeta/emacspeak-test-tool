@@ -1,19 +1,6 @@
-# case "c": await processAndQueueCodes(l)
-# case "s": await queueLine(cmd, params)
-# case "tts_exit": await instantTtsExit()
-# case "tts_pause": await instantTtsPause()
-# case "tts_reset": await instantTtsReset()
-# case "tts_resume": await instantTtsResume()
-# case "tts_set_punctuations": await queueLine(cmd, params)
-# case "tts_sync_state": await processAndQueueSync(l)
-# case "version": await instantVersion()
-
-
 RESTART
 s
 d
-version
-DELAY 3
 START_SKIP
 
 # For startup sound
@@ -25,11 +12,6 @@ DELAY 3
 ENV SWIFTMAC_AUDIO_TARGET LEFT
 RESTART
 tts_say If you hear this left channel only, notifications server is working
-DELAY 4.5
-
-ENV SWIFTMAC_AUDIO_TARGET RIGHT
-RESTART
-tts_say If you hear this right channel only, notifications server is working
 DELAY 4.5
 
 ENVCLEAR
