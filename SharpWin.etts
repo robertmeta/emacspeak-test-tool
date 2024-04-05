@@ -1,3 +1,4 @@
+tts_exit
 RESTART
 s
 d
@@ -12,16 +13,19 @@ tts_say If you hear this, basic server is working
 DELAY 3
 
 ENV SHARPWIN_AUDIO_TARGET LEFT
+tts_exit
 RESTART
 tts_say If you hear this left channel only, notifications server is working
 DELAY 4.5
 
 ENV SHARPWIN_AUDIO_TARGET RIGHT
+tts_exit
 RESTART
 tts_say If you hear this right channel only, notifications server is working
 DELAY 4.5
 
 ENVCLEAR
+tts_exit
 RESTART
 tts_say Back to both ears, now we are going to test settings
 DELAY 4
@@ -97,6 +101,7 @@ d
 DELAY 1
 
 ENV SHARPWIN_SOUND_VOLUME .25
+tts_exit
 RESTART
 tts_say You should hear ask-question at quarter volume
 DELAY 2
@@ -113,6 +118,7 @@ d
 DELAY 1
 
 ENV SHARPWIN_TONE_VOLUME .25
+tts_exit
 RESTART
 tts_say You should hear tone at quarter volume
 DELAY 2.3
@@ -174,6 +180,7 @@ a $ETTS_SD/ask-question.ogg
 d
 DELAY 1
 
+tts_exit
 RESTART
 tts_say Testing Beep Caps (alternating caps)
 DELAY 3
