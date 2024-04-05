@@ -1,8 +1,9 @@
-tts_exit
+ENV SHARPWIN_AUDIO_TARGET NONE
 RESTART
 s
 d
 tts_say This test takes about 2 minutes
+tts_say Interuptted intro
 DELAY 3
 
 tts_say Testing version (adn tts_say implicitly)
