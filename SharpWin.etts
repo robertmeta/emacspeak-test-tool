@@ -47,13 +47,13 @@ tts_say This should be slow
 DELAY 3
 
 tts_set_speech_rate .6
-tts_set_voice Alex
+tts_set_voice David
 d
-tts_say This should be Alex voice
+tts_say This should be David voice
 
 DELAY 2
-tts_set_voice Samantha
-q This should be Samantha voice
+tts_set_voice Zira
+q This should be Zira voice
 d
 DELAY 2
 
@@ -214,14 +214,14 @@ d
 
 tts_say testing voice embedding
 DELAY 2
-c [{voice Samantha}]
-q Samantha
-c [{voice Alex}]
-q Alex
-c [{voice Samantha}]
-q Samantha
-c [{voice Alex}]
-q Alex
+c [{voice Zira}]
+q Zira
+c [{voice David}]
+q David
+c [{voice Zira}]
+q Zira
+c [{voice David}]
+q David
 d
 DELAY 4
 
