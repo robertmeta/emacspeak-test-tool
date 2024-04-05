@@ -24,7 +24,7 @@ RESTART
 tts_say If you hear this right channel only, notifications server is working
 DELAY 4.5
 
-ENVCLEAR
+ENV SHARPWIN_AUDIO_TARGET NONE
 tts_exit
 RESTART
 tts_say Back to both ears, now we are going to test settings
