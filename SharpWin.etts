@@ -41,20 +41,20 @@ d
 tts_say This should be low pitched
 DELAY 2
 
-tts_set_speech_rate 8
+tts_set_speech_rate +5
 d
 tts_say This should be fast
 DELAY 1
 
-tts_set_speech_rate 2
+tts_set_speech_rate -5
 d
 tts_say This should be slow
 DELAY 3
 
-tts_set_speech_rate -8
+tts_set_speech_rate 0
 d
-tts_say This should be really slow
-DELAY 3
+tts_say Normal Again
+DELAY 2
 
 
 tts_set_speech_rate .6
