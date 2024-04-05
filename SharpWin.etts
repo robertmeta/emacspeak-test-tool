@@ -31,25 +31,31 @@ RESTART
 tts_say Back to both ears, now we are going to test settings
 DELAY 4
 
-tts_set_pitch_multiplier 2
+tts_set_pitch_multiplier 85
 d
 tts_say This should be high pitched
 DELAY 2
 
-tts_set_pitch_multiplier .5 
+tts_set_pitch_multiplier -85
 d
 tts_say This should be low pitched
 DELAY 2
 
-tts_set_speech_rate .8
+tts_set_speech_rate 8
 d
 tts_say This should be fast
 DELAY 1
 
-tts_set_speech_rate .2
+tts_set_speech_rate 2
 d
 tts_say This should be slow
 DELAY 3
+
+tts_set_speech_rate -8
+d
+tts_say This should be really slow
+DELAY 3
+
 
 tts_set_speech_rate .6
 tts_set_voice David
